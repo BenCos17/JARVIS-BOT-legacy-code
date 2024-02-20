@@ -4,6 +4,6 @@ No longer fuctional and also not recommended for any new bots as it has a lot of
 DO NOT USE FOR PRODUCTION WITHOUT UPDATING 
 
 New bot is running on
-https://dashboard.jarvisdiscordbot.net
-code from here:
+https://dashboard.jarvisdiscordbot.net.     
+using code from here:
 https://discord.red
