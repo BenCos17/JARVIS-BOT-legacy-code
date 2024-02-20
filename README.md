@@ -6,4 +6,6 @@ DO NOT USE FOR PRODUCTION WITHOUT UPDATING
 New bot is running on
 https://dashboard.jarvisdiscordbot.net.     
 using code from here:
-https://discord.red
+https://discord.red.         
+my custom cogs are located here: 
+https://github.com/bencos17/ben-cogs 
