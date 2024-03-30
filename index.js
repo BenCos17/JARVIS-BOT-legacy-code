@@ -1,14 +1,14 @@
 // Load up the discord.js library
 const { Client, GatewayIntentBits } = require('discord.js')
 const client = new Client({
-  intents: [
+    intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildPresences,
     GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.DirectMessages,
     GatewayIntentBits.MessageContent
-  ],
+    ],
  // partials: [Partials.Channel, Partials.Message, Partials.User, Partials.GuildMember, Partials.Reaction]
 })
 
@@ -24,7 +24,7 @@ client.on("ready", () => {
     console.log(`JARVIS has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
     // Example of changing the bot's playing game to something useful. `client.user` is what the
     // docs refer to as the "ClientUser".
-    client.user.setActivity(`playing the game of 2021`);
+    client.user.setActivity(`playing the game of 2024`);
 });
 
 client.once('ready', () => {
@@ -39,9 +39,9 @@ client.once('disconnect', () => {
 client.on("debug", console.log);
 
 // Configure the array used for random replies
-let replies = ["I don�t suffer from insanity. I enjoy every minute of it.", "God created the world. Everything else is made in China.", "Birthdays are good for you. Studies show that people who have the most of them live the longest.",
-    "It's true that we don't know what we've got until we lose it, but it's also true that we don't know what we've been missing until it arrives.", "The only way to keep your health is to eat what you don't want, drink what you don't like, and do what you'd rather not. �Mark Twain",
-    "The average woman would rather have beauty than brains, because the average man can see better than he can think.", "One of the great things about books is sometimes there are some fantastic pictures. �George W. Bush", "Always remember: you're unique, just like everyone else.",
+let replies = ["I don t suffer from insanity. I enjoy every minute of it.", "God created the world. Everything else is made in China.", "Birthdays are good for you. Studies show that people who have the most of them live the longest.",
+    "It's true that we don't know what we've got until we lose it, but it's also true that we don't know what we've been missing until it arrives.", "The only way to keep your health is to eat what you don't want, drink what you don't like, and do what you'd rather not.  Mark Twain",
+    "The average woman would rather have beauty than brains, because the average man can see better than he can think.", "One of the great things about books is sometimes there are some fantastic pictures.  George W. Bush", "Always remember: you're unique, just like everyone else.",
     "When you're right, no one remembers. When you're wrong, no one forgets.", "Cheer up, the worst is yet to come.", "If you can't see the bright side of life, polish the dull side.", "Everybody wants to go to heaven, but nobody wants to die.", "I stopped fighting my inner demons, we're on the same side now.", "Well-behaved women rarely make history.",
     "He who laughs last, didn't get it.", "Sisters are a pain to live with :joy:", "We live in an age where pizza gets to your home before the police.", "Cheese . . . milk's leap toward immortality.", " A clear conscience is usually the sign of a bad memory.", " I get enough exercise pushing my luck.",
     " When life hands you lemons, make lemonade, find the person that life handed vodka to, and have a party.", "https://tenor.com/view/uno-no-u-reverse-card-reflect-glitch-gif-14951171"];
@@ -91,7 +91,7 @@ client.on("messageCreate", async message => {
         message.channel.send("https://discord.com/api/oauth2/authorize?client_id=603939742316363778&permissions=133295622&scope=bot")
     }
 
-    //say command *say [message]
+    //say command =say [message]
     if (command === "say") {
         const sayMessage = args.join(" ");
         //deletes the command message
@@ -99,20 +99,28 @@ client.on("messageCreate", async message => {
         // And we get the bot to say the thing: 
         message.channel.send(sayMessage);
     }
-    //avatar command [*avatar @user]
-    if (command === 'avatar') {
+//avatar command [=avatar @user]
+if (command === 'avatar') {
+    try {
         if (!message.mentions.users.size) {
-            return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+            // If no user is mentioned, show the author's avatar
+            const authorAvatarURL = message.author.displayAvatarURL({ dynamic: true });
+            return message.channel.send(`Your avatar: [Click Here](${authorAvatarURL})`);
         }
+
+        // Map mentioned users' avatars to links
         const avatarList = message.mentions.users.map(user => {
-            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+            const avatarURL = user.displayAvatarURL({ dynamic: true });
+            return `${user.username}'s avatar: [Click Here](${avatarURL})`;
         });
 
-        // send the entire array of strings as a message
-        // by default, discord.js will `.join()` the array with `\n`
         message.channel.send(avatarList);
-        //the avatar will get someones profile picture if they are mentioned (If no one is mentioned it will just get the member who ran the commands profile picture)
+    } catch (error) {
+        console.error('Error fetching avatar:', error);
+        message.channel.send('Error fetching avatar. Please try again later.');
     }
+}
+
     //sends big clive usb charger song
     if (command === "usb")
         message.channel.send("https://youtu.be/ioAq7PI1Uwg")
@@ -126,10 +134,10 @@ client.on("messageCreate", async message => {
     //help command
     if (command === 'help') {
         if (!args.length) {
-            return message.channel.send(`You need to specify what command you require help with (Use *help commands for user commands and *help moderation for moderater commands, ${message.author}!`);
+            return message.channel.send(`You need to specify what command you require help with (Use =help commands for user commands and =help moderation for moderater commands, ${message.author}!`);
         }
         if (args[0] === 'moderation') {
-            return message.channel.send('the ban command is *ban @user \n the kick command is *kick @user');
+            return message.channel.send('the ban command is =ban @user \nthe kick command is =kick @user');
         }
 
         message.channel.send(`First argument: ${args[0]}`);
@@ -139,7 +147,7 @@ client.on("messageCreate", async message => {
             return message.channel.send(`please provide a command category (the only one at the moment is commands, ${message.author}!`);
         }
         if (args[0] === 'commands') {
-            return message.channel.send('> the bot prefix is * \n > the say command is * say[message]  \n > the command to get someones avatar is *avatar @member \n > the command to get a random phrase is *speek \n > The developer of the bot is BenCos18#4325 (contact me on discord if you find any bugs thanks \n > the command to get the bots ping is ping or pong');
+            return message.channel.send('> the bot prefix is = \n > the say command is = say[message]  \n  the command to get someones avatar is =avatar @member \n > the command to get a random phrase is =speek \n > The developer of the bot is bencos18 (contact me on discord if you find any bugs thanks \n > the command to get the bots ping is ping or pong');
         }
 
     }
