@@ -9,6 +9,3 @@ using code from here:
 https://discord.red.         
 my custom cogs are located here: 
 https://github.com/bencos17/ben-cogs 
-
-update added newer code that works somewhat     
-still very basic and not recommended anymore 
