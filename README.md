@@ -8,6 +8,6 @@ the other files in the repo are updated however I am bot liable for any damages 
 New bot is running on
 https://jarvisdiscordbot.net.     
 using code from here:
-https://discord.red.         
+https://discord.red. with a custom fork though (https://github.com/JARVIS-discordbot/Red-DiscordBot-jarvis)
 my custom cogs are located here: 
 https://github.com/bencos17/ben-cogs 
