@@ -231,6 +231,13 @@ if (command === 'avatar') {
             message.reply("You didn't mention the user to ban!");
         }
     }
+
+    if (command === "roundtrip") {
+        // Sends a message and measures the round trip latency
+        const m = await message.channel.send("Calculating round trip...");
+        const roundTripLatency = m.createdTimestamp - message.createdTimestamp;
+        m.edit(`Round trip latency is ${roundTripLatency}ms.`);
+    }
 });
 
 client.login(config.token);
